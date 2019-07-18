@@ -1,0 +1,282 @@
+{
+    "$id": "https://github.com/foxguardsolutions/PatchReportingSchema/raw/master/patches.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "JSON Schema for FoxGuard Solutions patch reporting version 1.0",
+    "type": "object",
+    "properties": {
+        "documentDetails": {
+            "$ref": "#/definitions/DocumentDetails"
+        },
+        "vendor": {
+            "$ref": "#/definitions/Vendor"
+        }
+    },
+    "required": [
+        "$id",
+        "$schema",
+        "documentDetails",
+        "vendor"
+    ],
+    "definitions": {
+        "DocumentDetails": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "publisher": {
+                    "$ref": "#/definitions/Publisher"
+                },
+                "generated": {
+                    "type": "string",
+                    "format": "date"
+                }
+            },
+            "required": [
+                "generated",
+                "publisher"
+            ],
+            "title": "DocumentDetails"
+        },
+        "Publisher": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "publisherUrl": {
+                    "type": "string",
+                    "format": "uri"
+                }
+            },
+            "required": [
+                "publisherUrl"
+            ],
+            "title": "Publisher"
+        },
+        "Vendor": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Product"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "products"
+            ],
+            "title": "Vendor"
+        },
+        "Product": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "operatingSystem": {
+                    "type": "string"
+                },
+                "patchAvailability": {
+                    "enum": [
+                        "Public",
+                        "Private"
+                    ]
+                },
+                "versions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Version"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "patchAvailability",
+                "versions"
+            ],
+            "title": "Product"
+        },
+        "Version": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "released": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "cpe23": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "cpe:2\\.[3-4]:[aho](?::(?:[a-zA-Z0-9!\"#$%&'()*+,\\\\\\-_.\\/;<=>?@\\[\\]^`{|}~]|\\\\:)+){10}$"
+                    }
+                },
+                "patches": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Patch"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "patches",
+                "released"
+            ],
+            "title": "Version"
+        },
+        "Patch": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "severity": {
+                    "enum": [
+                        "Unknown",
+                        "Critical",
+                        "Important",
+                        "Optional"
+                    ]
+                },
+                "updateType": {
+                    "enum": [
+                        "Security",
+                        "Non-Security",
+                        "Potentially Security-Related"
+                    ]
+                },
+                "notes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Note"
+                    }
+                },
+                "patchVersion": {
+                    "type": "string"
+                },
+                "released": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "fileName": {
+                    "type": "string"
+                },
+                "checksums": {
+                    "$ref": "#/definitions/Checksums"
+                },
+                "cves": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^CVE-[0-9]{4}-[0-9]{4,}$"
+                    }
+                },
+                "links": {
+                    "$ref": "#/definitions/Links"
+                }
+            },
+            "required": [
+                "name",
+                "patchVersion",
+                "released"
+            ],
+            "title": "Patch"
+        },
+        "Checksums": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "md5": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{32}$"
+                },
+                "sha1": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{40}$"
+                },
+                "sha256": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{64}$"
+                },
+                "sha384": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{96}$"
+                },
+                "sha512": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{128}$"
+                },
+                "ripemd160": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{40}$"
+                }
+            },
+            "title": "Checksums"
+        },
+        "Links": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "securityBulletins": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                },
+                "releaseNotes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                },
+                "related": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uri"
+                    }
+                },
+                "download": {
+                    "type": "string",
+                    "format": "uri"
+                }
+            },
+            "title": "Links"
+        },
+        "Note": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "enum": [
+                        "Description",
+                        "Comment",
+                        "Security Summary"
+                    ]
+                },
+                "content": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "content",
+                "type"
+            ],
+            "title": "Note"
+        }
+    }
+}

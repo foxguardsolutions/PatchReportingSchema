@@ -1,0 +1,70 @@
+{
+    "$id": "https://github.com/foxguardsolutions/PatchReportingSchema/raw/master/patches.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "documentDetails": {
+        "publisher": {
+            "publisherUrl": "https://www.patchfinderllc.com"
+        },
+        "generated": "2019-06-27"
+    },
+    "vendor": {
+        "name": "Acme Corporation",
+        "note": "The Acme Corporation is a fictional corporation that features prominently in the Road Runner/Wile E. Coyote animated shorts as a running gag featuring outlandish products that fail or backfire catastrophically at the worst possible times.",
+        "products": [{
+            "name": "Anvil",
+            "operatingSystem": "Windows 10: Looney Tunes Edition",
+            "patchAvailability": "Public",
+            "versions": [{
+                "name": "2.4.6",
+                "released": "2017-03-19",
+                "cpe23": [
+                    "cpe:2.3:a:acmecorporation:anvil:2.4.6:*:*:*:*:*:*:*"
+                ],
+                "patches": [{
+                    "name": "Anvil Patch for CVE-2019-1234 and CVE-2019-4321",
+                    "severity": "Critical",
+                    "updateType": "Security",
+                    "notes": [{
+                        "type": "Description",
+                        "content": "Anvil Patch v1.0.0"
+                    },
+                    {
+                        "type": "Comment",
+                        "content": "Security patch for Anvil"
+                    },
+                    {
+                        "type": "Security Summary",
+                        "content": "Fixes critical security issue as part of CVE-2019-1234 and CVE-2019-4321 that allows remote code execution."
+                    }],
+                    "patchVersion": "1.0.0",
+                    "released": "2019-02-01",
+                    "fileName": "anvil_patch_1_0_0.exe",
+                    "checksums": {
+                        "md5": "06F247EAEC2E9EF430BFB6B63191243D",
+                        "sha1": "70D048007DD4CA70136BCBBA0B9D856A1295B839",
+                        "sha256": "8A4D0225D89FF949570D05470B96B155832F643C3B3037A1A7F880F24A6C5EA3",
+                        "sha384": "AD270CCF584DEB029C346627DC5C071A26219D216ED2E6850A428A308933F65D0D739ACADCDA94EDEB828F9FAC361FD1",
+                        "sha512": "5D42AB698613A88A8BF489B7672FA6354D343E47767DC5C38A75F7BB32F9E6E1C1C633BEBD8DD0D5AA5AAE59B4A2FCC34724833FF817336A7524E65FCDF62894",
+                        "ripemd160": "0275C1F454D5171A7258EA69D7BDD34B422BB363"
+                    },
+                    "cves": [
+                        "CVE-2019-1234",
+                        "CVE-2019-4321"
+                    ],
+                    "links": {
+                        "securityBulletins": [
+                            "https://www.acmecorporation.com/products/anvil/patch100SecurityBulletin.html"
+                        ],
+                        "releaseNotes": [
+                            "https://www.acmecorporation.com/products/anvil/patch100ReleaseNotes.html"
+                        ],
+                        "related": [
+                            "https://www.acmecorporation.com/products/anvil/patch100Related.html"
+                        ],
+                        "download": "https://www.acmecorporation.com/products/anvil/patch100Download.html"
+                    }
+                }]
+            }]
+        }]
+    }
+}
